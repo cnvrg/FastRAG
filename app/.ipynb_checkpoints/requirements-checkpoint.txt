@@ -1,0 +1,5 @@
+farm-haystack[elasticsearch]==1.15.0
+cnvrgv2==1.0.44
+dash==2.10.2
+minio==7.1.15
+dash_extensions==1.0.1

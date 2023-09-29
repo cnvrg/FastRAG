@@ -1,0 +1,107 @@
+---
+title: FastRAG
+version: 1.0.0
+description: "This blueprint enables using RAG with ElasticSearch and MinIO"
+long_description: "This blueprint uses Elasticsearch as document store and MinIO for updating the document store for RAG. You can connect with external LLM for content generation."
+author: "cnvrg"
+author_email: "libhub@cnvrg.io"
+
+# At least one tag [inference, training, data] must be present
+tags:
+  - training
+
+# List of tasks (libraries)
+tasks:
+  - title: Listen
+    top: 300
+    left: 0
+
+    # Type must be according to the flow task conventions (data, exec, deploy)
+    type: exec
+
+    # The library data
+    library: listener
+    library_version: 1.0.0
+
+    # The flattened library parameters (in this case we have training library)
+    command: python updator.py
+
+    requirements:
+      cpu: 3.5
+      memory: 8
+      gpu: 0
+      hpu: 0
+
+    image: python:3.8.10
+    language: python3
+
+    # The "arguments" property changes to "params", rest remains the same.
+    # Params in the blueprint yaml can be used to override the arguments in the library.
+    params:
+      - key: storage_solution
+        type: 'categorical'
+        values:
+          - 's3'    
+      - key: bucket_name
+        type: 'categorical'
+        values:
+          - ''
+      - key: index
+        type: 'categorical'
+        values:
+          - ''
+      - key: port
+        type: 'categorical'
+        values:
+          - ''
+      - key: host
+        type: 'categorical'
+        values:
+          - ''
+      - key: api_link
+        type: 'categorical'
+        values:
+          - ''
+      # - key: queue_url
+      #   type: 'categorical'
+      #   values:
+      #     - ''  
+      # - key: region_name
+      #   type: 'categorical'
+      #   values:
+      #     - ''       
+          
+  - title: Inference
+    top: 400
+    left: 500
+    
+    type: deploy
+    
+    library: rag-endpoint
+    library-version: 1.0.0
+    
+    kind: webservice 
+    
+    requirements: 
+      cpu: 3.5
+      memory: 8
+      gpu: 0
+      hpu: 0
+      
+    image: python:3.8.10
+    language: python3
+
+    accept_files: false
+
+    file_name: predict.py 
+    function_name: query
+    prep_file: '' 
+    prep_function: '' 
+    input_example:
+      query: text
+    input_schema:
+      query: text
+    output_schema: {} 
+  
+ 
+relations: []

@@ -1,0 +1,30 @@
+prompt: "We will insert documents here: {documents} and we will insert query here {query}"
+documents: "These are my documents"
+query: "this is my question"
+final_prompt: "We will insert documents here: These are my documents and we will insert query here this is my question"
+
+#to test huggingface model set provider = huggingface
+#to test cnvrg model set provider = cnvrg
+#to test openai model set provider = openai
+
+test_llm: "True"
+api_key: ""
+provider: "huggingface"
+model_name: "google/flan-t5-xxl"
+
+cnvrg_url:
+
+#set up elasticSearch
+test_ElasticSearch: "True"
+
+host : ""
+port : "9200"
+username : "None"
+password : "None"
+index : ""
+retriever_n : "10"
+ranker_n : "5"
+
+
+
+

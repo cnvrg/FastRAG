@@ -1,0 +1,40 @@
+---
+title: RAG endpoint
+version: 1.0.0
+description: "RAG endpoint takes a question as input and returns generated answer"
+icon: python
+
+author: "cnvrg"
+author_email: "libhub@cnvrg.io"
+
+tags:
+  - inference
+
+kind: webservice
+
+command: python3 predict.py
+
+requirements:
+  cpu: 3.5
+  memory: 8
+  gpu: 0
+  hpu: 0
+
+image: python:3.8.10
+
+language: python3
+
+arguments:
+  accept_files: false
+  gunicorn_config:
+    - key: workers
+      value: '1'
+  file_name: predict.py
+  function_name: query
+  prep_file: ''
+  prep_function: ''
+  input_example:
+    query: text
+  input_schema:
+    query: text
+  output_schema: {}

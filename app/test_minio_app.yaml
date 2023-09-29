@@ -1,0 +1,10 @@
+storage_solution: "minio",
+host_address: "127.0.0.1",
+port: "9200",
+index: "",
+search_field: "content",
+bucket_name: "fastrag",
+api_link: "",
+secret_key: "",
+access_key: ""
+document_name: "test.json"
