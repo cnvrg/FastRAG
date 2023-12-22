@@ -43,7 +43,7 @@ Note: Adjusting the document's format is possible to meet the model's requiremen
 Note: Adjusting the document's format is possible to meet the model's requirements. However, it's essential to modify how the fucntion `updator` within the `predict.py` script accesses the document.
 
 ### ElasticSearch setup variables
-`ELASTIC_PORT` = The port number of the ElasticSearch service.
+`ELASTIC_PORT` = The port number of the ElasticSearch service. (80 - if connecting to an http scheme, 443 if connecting to an https scheme)
 
 `ELASTIC_HOST` = The IP address of the ElasticSearch service.
 
@@ -99,6 +99,9 @@ Once deployed, go to the endpoint page and scroll down.
 `RETRIEVER_N` = The  number of top documents you want the retriever to retrieve from the ElasticSearch index. For example 20.
 
 `RANKER_N` = The  number of top documents you want to send to the LLM after re-ranking. For example 5.
+
+`SCHEME` = The https/https scheme
+
 
 ### Instructions on setting up Elastic Search
 

@@ -32,7 +32,7 @@ tasks:
       gpu: 0
       hpu: 0
 
-    image: python:3.8.10
+    image: cnvrg:v6.0
     language: python3
 
     # The "arguments" property changes to "params", rest remains the same.
@@ -62,14 +62,20 @@ tasks:
         type: 'categorical'
         values:
           - ''
-      # - key: queue_url
-      #   type: 'categorical'
-      #   values:
-      #     - ''  
-      # - key: region_name
-      #   type: 'categorical'
-      #   values:
-      #     - ''       
+      - key: queue_url
+        type: 'categorical'
+        values:
+          - ''  
+      - key: region_name
+        type: 'categorical'
+        values:
+          - '' 
+
+      - key: scheme
+        type: 'categorical'
+        values:
+          - '' 
+          
           
   - title: Inference
     top: 400
@@ -88,7 +94,7 @@ tasks:
       gpu: 0
       hpu: 0
       
-    image: python:3.8.10
+    image: cnvrg:v6.0
     language: python3
 
     accept_files: false

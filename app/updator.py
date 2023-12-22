@@ -72,7 +72,7 @@ def argument_parser():
         "--username",
         action="store",
         dest="username",
-        default=None,
+        default="username",
         required=False,
         help="""Enter the username for ElasticSearch""",
     )
@@ -81,21 +81,54 @@ def argument_parser():
         "--password",
         action="store",
         dest="password",
-        default=None,
+        default="password",
         required=False,
         help="""Enter the password for ElasticSearch""",
     )
 
+    parser.add_argument(
+        "--queue_url",
+        action="store",
+        dest="queue_url",
+        default="queue_url",
+        required=False,
+        help="""AWS queue url""",
+    )
+    
+    parser.add_argument(
+        "--region_name",
+        action="store",
+        dest="region_name",
+        default="region_name",
+        required=False,
+        help="""AWS queue url""",
+    )    
+
+    parser.add_argument(
+        "--scheme",
+        action="store",
+        dest="scheme",
+        default="scheme",
+        required=False,
+        help="""https/http scheme""",
+    )    
+
     return parser.parse_args()
 
-    
 def main():
     args = argument_parser()
-    data = {
-    **args.__dict__,
-    'access_key': os.environ['MINIO_ACCESS_KEY'],
-    'secret_key': os.environ['MINIO_SECRET_KEY']
-    }
+    if 'MINIO_ACCESS_KEY' in os.environ:
+        data = {
+        **args.__dict__,
+        'access_key': os.environ['MINIO_ACCESS_KEY'],
+        'secret_key': os.environ['MINIO_SECRET_KEY']
+        }
+    else:
+        data = {
+        **args.__dict__,
+        'aws_key_id': os.environ['AWS_ACCESS_KEY'],
+        'aws_secret_key': os.environ['AWS_SECRET_KEY']
+        }
     #save arguments
     with open('commandline_args.txt', 'w') as f:
         json.dump(data, f, indent=2)
