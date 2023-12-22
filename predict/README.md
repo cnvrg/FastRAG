@@ -58,6 +58,10 @@ Note: Adjusting the document's format is possible to meet the model's requiremen
 `MINIO_ACCESS_KEY` : The access key to connect with MinIO.
 `MINIO_SECRET_KEY` :  The secret key to connect with MinIO.
 
+`AWS_ACCESS_KEY` : The access key to connect with AWS/S3.
+`AWS_SECRET_KEY` :  The secret key to connect with AWS/S3.
+
+
 ### LLM setup variables
 `PROVIDER` = The name of the LLM service provider. Acceptable values are: `huggingface` , `openai` and `cnvrg`
 
