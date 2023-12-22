@@ -1,25 +1,29 @@
 # Updater Listener
 
-This library launches a web app that continuously listens to *object creation* events on a specific bucket present on MinIO. When a user uploads any document to the specific MinIO bucket, the web app   automatically uploads it to the ElasticSearch service. Thus, the next time a user asks a question, if the new document is relevant, that document content is available to the LLM for response generation.
+This library launches a web app that continuously listens to *object creation* events on a specific bucket present on MinIO / S3. When a user uploads any document to the specific MinIO / S3 bucket, the web app   automatically uploads it to the ElasticSearch service. Thus, the next time a user asks a question, if the new document is relevant, that document content is available to the LLM for response generation.
 
-Currently, we support only the MinIO object storage for this web app.
-The user must provide a few command line arguments to the library to specify the configurations for the MinIO bucket and the ElasticSearch service.
+Currently, we support MinIO / S3 object storage for this web app.
+The user must provide a few command line arguments to the library to specify the configurations for the MinIO / S3 bucket and the ElasticSearch service.
 
 ## Document structure:
-The documents uploaded to the minIO bucket must be formatted as JSON files. A single JSON file may contain multiple documents. The data structure should reflect the example shown:
+The documents uploaded to the minIO / S3 bucket must be formatted as JSON files. A single JSON file may contain multiple documents. The data structure should reflect the example shown:
     [
         {"content": "This is data from document 1"},
         {"content": "This is data from document 2"}
     ]
 ## Input Args
 
+`--storage_solution` : Type of storage to be used -> MinIo / S3 .(80 - if connecting to an http scheme, 443 if connecting to an https scheme)
 `--host_address` : The IP  address of the ElasticSearch service.
 `--port` : The port number of the ElasticSearch service.
 `--index` : The name of the ElasticSearch index where all the relevant documents are/will be stored for use by RAG.
 `--username` : The Username for the ElasticSearch service in case it is protected.
 `--password` : The password for the ElasticSearch service in case it is protected.
-`--bucket` : The Name of the MinIO bucket that will be connected to the web app for listening.
+`--bucket_name` : The Name of the MinIO / S3 bucket that will be connected to the web app for listening.
 `--api_link` : The API link to connect with MiniIO.
+`--queue_url` : URL to the AWS SNS queue.
+`--region_name` : Region name of the AWS bucket.
+`--scheme` : https/https scheme
 
 # Web App Configuration
 - The web app runs on the same compute template that is used to run this library. 
